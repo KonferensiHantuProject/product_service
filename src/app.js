@@ -16,8 +16,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Seperate Route
-const product_auth = require('./api/routes/product-routes');
-app.use('/products', product_auth);
+const product_auth = require('./routes/product.route');
+app.use('/api/v1', product_auth);
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
