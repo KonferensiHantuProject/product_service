@@ -2,7 +2,7 @@
 const jwt = require("jsonwebtoken");
 
 // Response Builder
-const ResponseBulider = require('../helpers/responseBuilder');
+const responseBulider = require('../helpers/responseBuilder');
 
 authenticateJWT = (req, res, next) => {
     const authHeader = req.headers.authorization;
@@ -13,14 +13,14 @@ authenticateJWT = (req, res, next) => {
         // Verifying Token
         jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
             if (err) {
-                return ResponseBulider.errors(res, 403, err.message); 
+                return responseBulider.errors(res, 403, err.message); 
             }
   
             req.user = user;
             next();
         });
     } else {
-        return ResponseBulider.errors(res, 401, 'Tidak ada Token'); 
+        return responseBulider.errors(res, 401, 'Tidak ada Token'); 
     }
   }
 

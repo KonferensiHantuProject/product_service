@@ -2,7 +2,7 @@
 const Product = require('../../models/product.model');
 
 // Helpers
-const { success, errors } = require('../../helpers/responseBuilder');
+const responseBuilder = require('../../helpers/responseBuilder');
 
 // Crypto JS
 const CryptoJS = require('crypto-js');
@@ -18,7 +18,7 @@ index = async (req, res) => {
 
     } catch (error) {
         // If Error
-        return ResponseBulider.errors(res, 500, error.message);
+        return responseBuilder.errors(res, 500, error.message);
     }
 }
 
