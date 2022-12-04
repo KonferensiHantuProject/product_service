@@ -65,6 +65,48 @@ store = async (req, res) => {
     }
 }
 
+// Update Product
+update = async (req, res) => {
+    try {
+        // Konstanta errors
+        const errors = validationResult(req);
+
+        // Kalau error
+        if(!errors.isEmpty())
+        {
+            // Errors
+            errors.errors.forEach(error => {
+                // Status
+                res.status(422);
+
+                // Throw error
+                throw new Error(error.msg);
+            });
+
+        }else{
+            // Finding product
+            const product = await Product.findOne({  _id: req.params._id });
+            
+            if(product == null) {
+                // Status
+                res.status(404);
+
+                // Throw error
+                throw new Error('Product Not Found');
+            }
+
+            // Update Product
+            await product.updateOne(req.body).then( (result) =>{
+                return responseBuilder.success(res, result);
+            });
+        }
+
+    } catch (error) {
+        // If Error
+        return errors(res, res.statusCode, error.message);
+    }
+}
+
 module.exports = {
     index,
     store
