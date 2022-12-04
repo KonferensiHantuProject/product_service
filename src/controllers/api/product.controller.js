@@ -107,8 +107,26 @@ update = async (req, res) => {
     }
 }
 
+// Delete Product
+destroy = async (req, res) => {
+    try {
+
+        // Delete Process
+        Product.deleteOne({ _id: req.params._id }).then((result) => {
+            
+            // Redirect 
+            return responseBuilder.success(res, 'Product Deleted');
+        });     
+
+    } catch (error) {
+        // If Error
+        return responseBuilder.errors(res, 500, error.message);
+    }
+}
+
 module.exports = {
     index,
     store,
-    update
+    update,
+    destroy
 };

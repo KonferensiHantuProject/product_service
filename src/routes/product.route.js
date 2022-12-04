@@ -17,4 +17,7 @@ router.post('/products', validation.storeProductValidtaion(), validation.validat
 // Update
 router.put('/products/:_id', validation.updateProductValidtaion(), validation.validate, productController.update);
 
+// Delete
+router.delete('/products/:_id', productController.destroy);
+
 module.exports = router;
