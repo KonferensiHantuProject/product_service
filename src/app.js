@@ -7,6 +7,9 @@ require('dotenv').config();
 // Connection
 require('./config/db');
 
+// Rabbit Mq
+require('./config/rabbitmq');
+
 const app = express();
 
 // Set up method override
