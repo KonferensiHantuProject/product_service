@@ -16,7 +16,7 @@ index = async (req, res) => {
 
         // Get All Data
         const products = await Product.find()
-                            .populate('product_maker', { _id: 1, username: 2, email: 3});
+                            .populate('product_maker', { _id: 1, username: 2, email: 3, first_name: 4, last_name: 5});
 
         // Return Recieved Data
         return responseBuilder.success(res, products)
