@@ -109,5 +109,6 @@ update = async (req, res) => {
 
 module.exports = {
     index,
-    store
+    store,
+    update
 };

@@ -16,12 +16,16 @@ storeProductValidtaion = () => {
       body('product_name').custom(async (value, { req }) => {
   
         // Cek Duplikatnya
-        const duplicate = await Product.findOne({ product_name: value });
+        const duplicates = await Product.find({ product_name: value });
 
-        // If there is a duplicate
-        if(duplicate && duplicate.name === value){
-            throw new Error('Nama Produk Sudah ada Sudah ada')
-        }            
+        // Checking all duplicate
+        duplicates.forEach( (duplicate) => {
+          // If there is a duplicate
+          if(duplicate && duplicate.product_name === value){
+              throw new Error('Nama Produk Sudah ada Sudah ada')
+          }            
+        })
+
 
         return true;
   
@@ -42,18 +46,16 @@ updateProductValidtaion = () => {
       body('product_name').custom(async (value, { req }) => {
   
         // Cek Duplikatnya
-        const duplicate = await Product.find({ product_name: value });
+        const duplicates = await Product.find({ product_name: value });
 
-        // If there is a duplicate
-        if(duplicate != 0){
-          if(duplicate.length == 1) {
-              if(duplicate[0]._id != req.user.userId) {
-                  throw new Error('Nama Produk Sudah adaa')
-              }
-          }else{
-              throw new Error('Nama Produk Sudah ada')
+        // Checking all duplicate
+        duplicates.forEach( (duplicate) => {
+          // If there is a duplicate
+          if(duplicate._id != req.params._id && duplicate.product_name === value){
+              throw new Error('Nama Produk Sudah ada Sudah ada')
           }            
-        }         
+        })
+        
 
         return true;
   

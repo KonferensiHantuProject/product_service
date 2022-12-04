@@ -15,6 +15,6 @@ router.get('/products', productController.index);
 router.post('/products', validation.storeProductValidtaion(), validation.validate, productController.store);
 
 // Update
-router.put('/products/:_id', validation.updateProductValidtaion(), validation.validate, productController.store);
+router.put('/products/:_id', validation.updateProductValidtaion(), validation.validate, productController.update);
 
 module.exports = router;
