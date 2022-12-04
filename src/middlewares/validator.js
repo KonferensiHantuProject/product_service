@@ -4,29 +4,23 @@ const { body, validationResult, check } = require('express-validator');
 const Product = require('../models/product.model');
 
 // Validation For Create User
-createProductValidtaion = () => {
+storeProductValidtaion = () => {
   return [
-      // Cek username
-      check('username', 'Username Tidak Valid').isString(),
+      // Cek Nama Produk
+      check('product_name', 'Nama Produk Tidak Valid').isString(),
 
-      // Cek email
-      check('email', 'Email Tidak Valid').isString(),
-
-      // Cek Fist Name
-      check('first_name', 'First Name Tidak Valid').isString(),
-
-      // Cek Last Name
-      check('last_name', 'Last Name Tidak Valid').isString(),
+      // Cek Harga Produk
+      check('product_price', 'Harga Produk Tidak Valid').isNumeric(),
   
       // Custom Validation
-      body('username').custom(async (value, { req }) => {
+      body('product_name').custom(async (value, { req }) => {
   
         // Cek Duplikatnya
-        const duplicate = await User.findOne({ username: value });
+        const duplicate = await Product.findOne({ product_name: value });
 
         // If there is a duplicate
         if(duplicate){
-            throw new Error('Username Sudah ada')
+            throw new Error('Nama Produk Sudah ada Sudah ada')
         }            
 
         return true;
@@ -50,6 +44,6 @@ validate = (req, res, next) => {
 
 // Exporting modules
 module.exports = {
-  createProductValidtaion,
+  storeProductValidtaion,
   validate
 };

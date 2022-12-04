@@ -11,4 +11,7 @@ router.use(auth.authenticateJWT)
 // Index
 router.get('/products', productController.index);
 
+// Store
+router.post('/products', validation.storeProductValidtaion(), validation.validate, productController.store);
+
 module.exports = router;
